@@ -1,0 +1,36 @@
+---
+// Galería: titular a dos columnas en banda crema y, debajo, un mosaico de fotos de borde a borde, sin márgenes,
+// con piezas grandes, anchas y normales y esquinas «de pompa» que dejan ver el fondo. Campos: `galeria[]` (rutas).
+// Sin fotos, la sección no se pinta.
+import { seccion } from '../../data/site';
+import { altGaleria } from '../../lib/seo';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const fotos = s ? s.galeria.filter((f) => typeof f === 'string' && f.trim()) : [];
+// Patrón de 6 que llena 4 columnas × 3 filas en escritorio y 2 columnas × 4 filas en móvil.
+const forma = (i: number) =>
+  [['m-grande m-ancha r1'], ['r2'], ['r3'], ['m-ancha r4'], ['r2 m-ancha-md'], ['m-ancha-md r3']][i % 6][0];
+---
+
+{
+  s && fotos.length > 0 && (
+    <section id={id} class="banda banda-crema pt-[var(--ritmo)] md:pt-[var(--ritmo-md)]">
+      <div class="contenedor">
+        <div class="cabeza-seccion">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} />
+          {s.texto && <p class="titular-texto">{s.texto}</p>}
+        </div>
+      </div>
+      <ul class="mosaico">
+        {fotos.map((f, i) => (
+          <li class={forma(i)}>
+            <Imagen src={f} alt={altGaleria(i)} ancho={900} alto={900} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

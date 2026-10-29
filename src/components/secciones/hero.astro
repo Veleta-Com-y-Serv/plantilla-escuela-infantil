@@ -1,0 +1,64 @@
+---
+// Portada partida a sangre: a la izquierda un bloque de color acento (amarillo) con antetítulo, título enorme, texto,
+// dos botones y etiquetas con icono (`items`); a la derecha la foto hasta el borde de la ventana con una gran esquina
+// redondeada, una nube y la pegatina redonda `destacado` {titulo, texto}. Estrella y arcoíris decorativos.
+// Festón amarillo abajo. Campos: antetitulo, titulo, texto, imagen, cta, cta_secundario, destacado, items[].
+import { seccion } from '../../data/site';
+import { altHero } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+import Forma from '../ui/Forma.astro';
+interface Props { id: string; primera?: boolean }
+const { id, primera = false } = Astro.props;
+const s = seccion(id);
+const destacado = (s?.destacado ?? {}) as { titulo?: string; texto?: string };
+const chips = s ? s.items.filter((it) => it && it.titulo) : [];
+---
+
+{
+  s && (
+    <section id={id} class="banda banda-amarilla feston overflow-x-clip">
+      <div class="hero-rejilla">
+        <div class="hero-texto">
+          <Forma tipo="estrella" class="hero-estrella" />
+          <span class="arcoiris hero-arcoiris" aria-hidden="true" />
+          <div class="relative">
+            {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+            <h1 class="hero-titulo">{s.titulo}</h1>
+            {s.texto && <p class="hero-parrafo">{s.texto}</p>}
+            {(s.cta?.url || s.cta_secundario?.url) && (
+              <div class="mt-9 flex flex-wrap gap-3.5">
+                {s.cta?.url && <a class="btn" href={s.cta.url}>{s.cta.texto}</a>}
+                {s.cta_secundario?.url && <a class="btn-sec" href={s.cta_secundario.url}>{s.cta_secundario.texto}</a>}
+              </div>
+            )}
+            {chips.length > 0 && (
+              <ul class="hero-chips">
+                {chips.map((it) => (
+                  <li>
+                    <span><Icono nombre={it.icono} tam={16} /></span>
+                    {it.titulo}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+        <div class="hero-foto">
+          {s.imagen ? (
+            <Imagen src={s.imagen} alt={altHero()} ancho={1400} alto={1200} prioridad={primera} />
+          ) : (
+            <div class="hero-foto-vacia" />
+          )}
+          <Forma tipo="nube" class="hero-nube" />
+          {destacado.titulo && (
+            <p class="pegatina">
+              <strong>{destacado.titulo}</strong>
+              {destacado.texto && <span>{destacado.texto}</span>}
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}

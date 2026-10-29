@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import Forma from '../components/ui/Forma.astro';
+---
+
+<Base titulo="Página no encontrada">
+  <section class="banda banda-amarilla">
+    <Forma tipo="nube" class="forma left-[4%] top-10 w-28 text-[var(--c-fondo)] md:w-44" />
+    <Forma tipo="estrella" class="forma right-[8%] top-14 w-12 rotate-12 text-primario md:w-16" />
+    <Forma tipo="cometa" class="forma bottom-12 right-[14%] hidden w-16 rotate-[18deg] text-[var(--verde)] md:block" />
+    <div class="contenedor relative flex min-h-[70svh] flex-col items-center justify-center py-24 text-center">
+      <p class="font-[family-name:var(--fuente-titulos)] text-[clamp(6rem,22vw,14rem)] font-black leading-none tracking-tighter text-primario">404</p>
+      <h1 class="titulo-seccion mt-4">Esta página se ha escondido</h1>
+      <p class="mx-auto mt-5 max-w-md text-lg font-semibold opacity-85">Puede que el enlace esté mal o que la página se haya movido.</p>
+      <p class="mt-10"><a class="btn" href="/">Volver al inicio</a></p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,12 @@
+---
+// Sello de la marca cuando no hay logo: tres piezas de construcción (círculo acento, cuadrado primario y
+// triángulo verde, que es la mezcla de los dos). Los colores van por CSS (.sello-*), así siguen a site.yaml.
+interface Props { class?: string }
+const { class: clase = '' } = Astro.props;
+---
+
+<svg class:list={['sello', clase]} viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+  <circle class="sello-a" cx="32" cy="15" r="11" />
+  <rect class="sello-b" x="5" y="23" width="20" height="20" rx="5" transform="rotate(-10 15 33)" />
+  <path class="sello-c" d="M33.5 27.5l10 16.5h-20z" stroke-linejoin="round" />
+</svg>

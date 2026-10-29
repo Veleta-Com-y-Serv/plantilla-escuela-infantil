@@ -1,0 +1,50 @@
+---
+// Cabecera «cometa»: fija, a todo el ancho y siempre sólida (color de fondo) con una franja de tres colores debajo
+// (acento, verde y primario). Sello de tres piezas + nombre a la izquierda, menú y botón píldora (boton_cabecera).
+// En móvil el botón sigue visible (por debajo de 380 px pasa al menú) y el menú se pliega sin librerías (<details>).
+// El aspecto está en src/styles/global.css (.cabecera--cometa).
+import { site } from '../data/site';
+import type { Enlace } from '../data/site';
+import Sello from './ui/Sello.astro';
+interface Props { variante?: string; cta?: Enlace | null }
+const { variante = 'cometa', cta = null } = Astro.props;
+---
+
+<header class={`cabecera cabecera--${variante}`}>
+  <div class="contenedor cabecera-fila">
+    <a href="/" class="marca" aria-label={`${site.nombre}, inicio`}>
+      {
+        site.logo ? (
+          <img src={site.logo} alt={site.nombre} class="marca-logo" width="160" height="40" />
+        ) : (
+          <>
+            <Sello class="cab-sello" />
+            <span class="marca-nombre">{site.nombre}</span>
+          </>
+        )
+      }
+    </a>
+    <nav class="cabecera-nav" aria-label="Menú principal">
+      {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+    </nav>
+    {cta && cta.url && <a href={cta.url} class="btn cab-boton">{cta.texto}</a>}
+    {
+      site.menu.length > 0 && (
+        <details class="menu-movil">
+          <summary aria-label="Menú">
+            <span class="menu-movil-icono" aria-hidden="true" />
+          </summary>
+          <nav class="menu-movil-panel" aria-label="Menú">
+            {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+            {cta && cta.url && <a href={cta.url} class="btn">{cta.texto}</a>}
+          </nav>
+        </details>
+      )
+    }
+  </div>
+</header>
+<script is:inline>
+  document.querySelectorAll('.menu-movil a').forEach(function (a) {
+    a.addEventListener('click', function () { a.closest('details').open = false; });
+  });
+</script>

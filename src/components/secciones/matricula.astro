@@ -1,0 +1,98 @@
+---
+// Matrícula: dos paneles a sangre. A la izquierda, panel primario (azul) con titular, pasos numerados unidos por
+// una línea de puntos (`items[]` {titulo, texto}), `nota` y teléfono/WhatsApp; a la derecha, panel acento claro con el
+// formulario sin servidor (mailto): familia, email, teléfono, aula (desplegable con los nombres de `aulas` de todas
+// las secciones activas), fecha de nacimiento, cuándo empezar y mensaje. Campos: texto, items, nota, boton.
+import { seccion, site, tel, whatsapp, valor, todasLasAulas } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const c = site.contacto;
+const aulas = [...new Set(todasLasAulas().map((x) => valor(x.nombre)).filter(Boolean))];
+const pasos = s ? s.items.filter((it) => it && valor(it.titulo)) : [];
+const nota = valor(s?.nota);
+const boton = valor(s?.boton) || 'Enviar';
+const email = c.email;
+const accion = email ? `mailto:${email}?subject=${encodeURIComponent(`Matrícula desde la web de ${site.nombre}`)}` : '';
+const p = `${id}-f`;
+---
+
+{
+  s && (
+    <section id={id} class="paneles" aria-label={valor(s.titulo) || undefined}>
+      <div class="panel panel--izq banda banda-azul">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="!mb-0" />
+        {pasos.length > 0 && (
+          <ol class="pasos">
+            {pasos.map((it, i) => (
+              <li class="paso">
+                <span class="paso-num" aria-hidden="true">{i + 1}</span>
+                <div>
+                  <h3>{it.titulo}</h3>
+                  {it.texto && <p>{it.texto}</p>}
+                </div>
+              </li>
+            ))}
+          </ol>
+        )}
+        {nota && <p class="nota">{nota}</p>}
+        {(c.telefono || c.whatsapp) && (
+          <div class="mt-9 flex flex-wrap gap-3.5">
+            {c.telefono && <a class="btn btn-amarillo" href={tel(c.telefono)}><Icono nombre="telefono" tam={18} />{c.telefono}</a>}
+            {c.whatsapp && <a class="btn-sec" href={whatsapp(c.whatsapp)} rel="noopener" target="_blank"><Icono nombre="whatsapp" tam={18} />WhatsApp</a>}
+          </div>
+        )}
+      </div>
+      <div class="panel panel--der banda banda-clara">
+        <span class="arcoiris panel-arcoiris" aria-hidden="true" />
+        <form class="formulario" action={accion || undefined} method="post" enctype="text/plain">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="campo sm:col-span-2">
+              <label for={`${p}-nombre`}>Tu nombre</label>
+              <input id={`${p}-nombre`} name="nombre" type="text" autocomplete="name" required />
+            </div>
+            <div class="campo">
+              <label for={`${p}-email`}>Email</label>
+              <input id={`${p}-email`} name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="campo">
+              <label for={`${p}-telefono`}>Teléfono</label>
+              <input id={`${p}-telefono`} name="telefono" type="tel" autocomplete="tel" />
+            </div>
+            {aulas.length > 0 && (
+              <div class="campo sm:col-span-2">
+                <label for={`${p}-aula`}>Aula que te interesa</label>
+                <select id={`${p}-aula`} name="aula">
+                  <option value="">Aún no lo sé</option>
+                  {aulas.map((t) => <option value={t}>{t}</option>)}
+                </select>
+              </div>
+            )}
+            <div class="campo">
+              <label for={`${p}-nacimiento`}>Fecha de nacimiento del peque</label>
+              <input id={`${p}-nacimiento`} name="nacimiento" type="date" />
+            </div>
+            <div class="campo">
+              <label for={`${p}-inicio`}>¿Cuándo os gustaría empezar?</label>
+              <input id={`${p}-inicio`} name="inicio" type="text" />
+            </div>
+            <div class="campo sm:col-span-2">
+              <label for={`${p}-mensaje`}>Mensaje</label>
+              <textarea id={`${p}-mensaje`} name="mensaje" rows="3"></textarea>
+            </div>
+          </div>
+          <label class="campo-check">
+            <input type="checkbox" name="privacidad" required />
+            <span>He leído el <a href="/aviso-legal">aviso legal y la política de privacidad</a>.</span>
+          </label>
+          <button type="submit" class="btn">{boton}</button>
+          <p class="formulario-aviso">
+            {email ? 'Al enviar se abre tu programa de correo con la solicitud lista.' : 'Formulario de muestra: todavía no envía mensajes. Usa el teléfono de contacto.'}
+          </p>
+        </form>
+      </div>
+    </section>
+  )
+}

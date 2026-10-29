@@ -1,0 +1,70 @@
+---
+// Horario y servicios: banda primaria (azul) con festón. A la izquierda el titular, las horas en grande
+// (`horario[]` {dia, horas}) y la `nota`; a la derecha los servicios (`items[]` {titulo, texto, icono}) con icono en
+// bola amarilla. Debajo, «un día en la escuela»: `jornada_titulo` y `jornada[]` {hora, titulo, icono} en fila con línea
+// de puntos. Lo que esté vacío no se pinta (sin horas no hay horas; sin jornada no hay fila).
+import { seccion, valor } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const horas = s ? s.horario.filter((h) => h && (valor(h.dia) || valor(h.horas))) : [];
+const servicios = s ? s.items.filter((it) => it && valor(it.titulo)) : [];
+const jornada = s ? s.jornada.filter((m) => m && valor(m.titulo)) : [];
+const nota = valor(s?.nota);
+const tituloJornada = valor(s?.jornada_titulo);
+const conServicios = servicios.length > 0;
+---
+
+{
+  s && (
+    <section id={id} class="banda banda-azul feston seccion">
+      <div class="contenedor">
+        <div class:list={['grid gap-14', conServicios && 'lg:grid-cols-12 lg:gap-20']}>
+          <div class:list={[conServicios && 'lg:col-span-5']}>
+            <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="!mb-0" />
+            {horas.length > 0 && (
+              <dl class="horas">
+                {horas.map((h) => (
+                  <div>
+                    {valor(h.dia) && <dt>{h.dia}</dt>}
+                    {valor(h.horas) && <dd>{h.horas}</dd>}
+                  </div>
+                ))}
+              </dl>
+            )}
+            {nota && <p class="nota">{nota}</p>}
+          </div>
+          {conServicios && (
+            <ul class="servicios content-start lg:col-span-7">
+              {servicios.map((it) => (
+                <li class="servicio">
+                  <span class="bola bola-amarilla"><Icono nombre={it.icono} tam={24} /></span>
+                  <div>
+                    <h3>{it.titulo}</h3>
+                    {it.texto && <p>{it.texto}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        {jornada.length > 0 && (
+          <div class="jornada">
+            {tituloJornada && <h3 class="jornada-titulo">{tituloJornada}</h3>}
+            <ol class="jornada-lista" style={`--n:${Math.min(jornada.length, 6)}`} aria-label={tituloJornada || undefined}>
+              {jornada.map((m, i) => (
+                <li class="momento">
+                  <span class:list={['bola', i % 2 ? 'bola-amarilla' : 'bola-crema']}><Icono nombre={m.icono} tam={30} /></span>
+                  {valor(m.hora) && <span class="momento-hora">{m.hora}</span>}
+                  <span class="momento-titulo">{m.titulo}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}

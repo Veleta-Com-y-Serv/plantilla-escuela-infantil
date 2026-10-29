@@ -1,0 +1,38 @@
+---
+// Opiniones de las familias: banda acento (amarillo) con festón y bocadillos de cómic de colores (fondo, primario,
+// verde, noche) con su piquito; debajo de cada uno, quién lo dice y `detalle` (p. ej. «Familia de Las Ardillas»).
+// Campos: `testimonios[]` (texto, autor, detalle). Sin opiniones, la sección no se pinta.
+import { seccion } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Forma from '../ui/Forma.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const opiniones = s ? s.testimonios.filter((t) => t && t.texto) : [];
+---
+
+{
+  s && opiniones.length > 0 && (
+    <section id={id} class="banda banda-amarilla feston seccion">
+      <Forma tipo="garabato" class="forma right-[6%] top-16 hidden w-40 text-primario md:block" />
+      <div class="contenedor relative">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        <ul class="bocadillos" style={`--n:${Math.min(opiniones.length, 3)}`}>
+          {opiniones.map((t, i) => (
+            <li>
+              <blockquote class:list={['bocadillo', `tono-${i % 4}`]}>
+                <p>{t.texto}</p>
+              </blockquote>
+              {t.autor && (
+                <p class="bocadillo-autor">
+                  {t.autor}
+                  {t.detalle && <span class="bocadillo-detalle">{t.detalle}</span>}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}

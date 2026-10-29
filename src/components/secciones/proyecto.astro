@@ -1,0 +1,67 @@
+---
+// Proyecto educativo: banda verde (mezcla de primario y acento). Fila 50/50 con la foto a sangre (toca el borde
+// izquierdo de la ventana, esquinas grandes redondeadas) y el texto en párrafos; debajo, los pilares (`items[]`
+// {titulo, texto, icono}) en cuatro columnas. Si hay `declaracion`, cierra una banda amarilla con la cita enorme
+// y su `firma`. Campos: antetitulo, titulo, texto (párrafos separados por una línea en blanco), imagen, items,
+// declaracion, firma.
+import { seccion, parrafos, valor } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+import Forma from '../ui/Forma.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const pilares = s ? s.items.filter((it) => it && valor(it.titulo)) : [];
+const declaracion = valor(s?.declaracion);
+const firma = valor(s?.firma);
+---
+
+{
+  s && (
+    <section id={id} aria-label={valor(s.titulo) || undefined}>
+      <div class:list={['banda banda-verde pb-[var(--ritmo)] md:pb-[var(--ritmo-md)]', !declaracion && 'feston', !s.imagen && 'pt-[var(--ritmo)] md:pt-[var(--ritmo-md)]']}>
+        <div class:list={[s.imagen ? 'fila-sangre' : 'contenedor']}>
+          {s.imagen && (
+            <div class="fila-sangre-foto">
+              <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1400} alto={1050} />
+            </div>
+          )}
+          <div class:list={[s.imagen && 'fila-sangre-texto']}>
+            {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+            {s.titulo && <h2 class="titulo-seccion max-w-[16ch]">{s.titulo}</h2>}
+            {s.texto && (
+              <div class="mt-7 max-w-[40rem] space-y-4 text-[1.15rem] font-semibold opacity-90">
+                {parrafos(s.texto).map((p) => <p>{p}</p>)}
+              </div>
+            )}
+          </div>
+        </div>
+        {pilares.length > 0 && (
+          <div class="contenedor mt-16 md:mt-20">
+            <ul class="pilares">
+              {pilares.map((it, i) => (
+                <li class="pilar">
+                  <span class:list={['bola h-16 w-16', i % 2 ? 'bola-azul' : 'bola-crema']}><Icono nombre={it.icono} tam={28} /></span>
+                  <h3>{it.titulo}</h3>
+                  {it.texto && <p>{it.texto}</p>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+      {declaracion && (
+        <figure class="banda banda-amarilla feston cita">
+          <Forma tipo="sol" class="forma forma-sol" />
+          <Forma tipo="cometa" class="forma forma-cometa" />
+          <div class="contenedor relative">
+            <span class="cita-comilla" aria-hidden="true">“</span>
+            <blockquote><p>{declaracion}</p></blockquote>
+            {firma && <figcaption>{firma}</figcaption>}
+          </div>
+        </figure>
+      )}
+    </section>
+  )
+}

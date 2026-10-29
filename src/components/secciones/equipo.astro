@@ -1,0 +1,39 @@
+---
+// Equipo: banda crema; titular a dos columnas y retratos en arco (silueta /placeholders/persona.svg salvo foto del
+// cliente) sobre un fondo de color que va cambiando (acento, verde, primario claro, acento claro), con nombre, cargo
+// en pastilla y texto. Campos: `personas[]` (nombre, cargo, foto, texto). Sin personas, la sección no se pinta.
+import { seccion } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const personas = s ? s.personas.filter((p) => p && p.nombre) : [];
+const fondos = ['bg-acento', 'bg-[var(--verde)]', 'bg-[var(--azul-claro)]', 'bg-[var(--amarillo-claro)]'];
+const pastillas = ['bg-primario text-[var(--c-sobre-primario)]', 'bg-acento text-[var(--c-sobre-acento)]'];
+---
+
+{
+  s && personas.length > 0 && (
+    <section id={id} class="banda banda-crema seccion">
+      <div class="contenedor">
+        <div class="cabeza-seccion">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} />
+          {s.texto && <p class="titular-texto">{s.texto}</p>}
+        </div>
+        <ul class:list={['equipo-rejilla', personas.length % 3 === 0 && personas.length % 4 !== 0 ? 'equipo-rejilla--3' : 'equipo-rejilla--4']}>
+          {personas.map((p, i) => (
+            <li>
+              <div class:list={['persona-marco', fondos[i % fondos.length]]}>
+                <Imagen src={p.foto || '/placeholders/persona.svg'} alt={p.nombre} ancho={600} alto={720} />
+              </div>
+              <h3 class="persona-nombre">{p.nombre}</h3>
+              {p.cargo && <p class:list={['pildora persona-cargo', pastillas[i % pastillas.length]]}>{p.cargo}</p>}
+              {p.texto && <p class="persona-texto">{p.texto}</p>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}

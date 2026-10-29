@@ -1,0 +1,173 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+# Listas siempre planas: nunca una lista dentro de un elemento de lista. Precios siempre entre comillas.
+nombre: Cometas de Colores
+eslogan: Escuela infantil de 0 a 3 años en Getafe.
+sector: escuela-infantil
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = sello de tres piezas + nombre.
+colores:
+  primario: "#2152d9"   # azul (bandas, botones, pie)
+  acento: "#ffd23f"     # amarillo (portada, formas, detalles). El verde sale de mezclar los dos.
+  fondo: "#fffaf0"      # crema
+  texto: "#1b2340"
+contacto:
+  telefono: "916 83 27 40"
+  email: hola@cometasdecolores.es
+  direccion: Calle del Arroyo Culebro 21, 28903 Getafe (Madrid)
+  horario: "Lunes a viernes, de 7:30 a 17:30."
+  whatsapp: "+34 644 83 27 40"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: https://www.facebook.com/
+  linkedin: ""
+menu:
+  - { texto: Aulas, url: "/#aulas" }
+  - { texto: Horario, url: "/#horario" }
+  - { texto: Equipo, url: "/#equipo" }
+  - { texto: Proyecto, url: "/#proyecto" }
+  - { texto: Preguntas, url: "/#preguntas" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Pide una visita, url: "/#matricula" }
+seo:
+  titulo: Cometas de Colores · Escuela infantil de 0 a 3 años en Getafe
+  descripcion: "Escuela infantil en Getafe para niños de 0 a 3 años: aulas por edades, cocina propia, horario de 7:30 a 17:30 y periodo de adaptación tranquilo."
+  tipo: ChildCare   # tipo de schema.org (ChildCare, Preschool, EducationalOrganization…)
+marca_pie: true   # «Web creada con NoExpertise» en el pie
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: Escuela infantil en Getafe
+    titulo: Aquí se crece jugando
+    texto: "Aulas pequeñas por edades, cocina propia y educadoras que conocen a cada peque por su nombre. Ven a vernos con tu familia."
+    imagen: /fotos/hero.jpg
+    cta: { texto: Pide una visita, url: "/#matricula" }
+    cta_secundario: { texto: Ver las aulas, url: "/#aulas" }
+    destacado: { titulo: "Matrícula abierta", texto: "Curso 2027-2028" }   # pegatina redonda sobre la foto
+    items:   # 3 etiquetas con icono
+      - { titulo: De 4 meses a 3 años, icono: nino }
+      - { titulo: Cocina propia, icono: cubiertos }
+      - { titulo: Patio con huerto, icono: hoja }
+
+  aulas:
+    activa: true
+    antetitulo: Nuestras aulas
+    titulo: Un aula para cada etapa
+    texto: "Grupos reducidos y espacios pensados para la edad de tu peque: para gatear, para dar los primeros pasos y para descubrirlo todo."
+    cta: { texto: Pedir plaza, url: "/#matricula" }   # botón de cada aula (deja elegida esa aula en la matrícula)
+    aulas:
+      - { nombre: Los Pollitos, edades: "4 a 12 meses", texto: "Un aula tranquila, con cunas, zona de gateo y mucho mimo. Seguimos el ritmo de cada bebé.", precio: "desde 330 €/mes", imagen: /fotos/aula-1.jpg }
+      - { nombre: Las Ardillas, edades: "1 a 2 años", texto: "Primeros pasos, primeras palabras y juego libre con materiales naturales.", precio: "desde 310 €/mes", imagen: /fotos/aula-2.jpg }
+      - { nombre: Los Delfines, edades: "2 a 3 años", texto: "Rincones de juego, cuentos, pintura y la despedida del pañal sin prisas.", precio: "desde 290 €/mes", imagen: /fotos/aula-3.jpg }
+      - { nombre: Ludoteca de tarde, edades: "3 a 6 años", texto: "Después del cole: merienda, juego, manualidades y talleres de inglés.", precio: "desde 95 €/mes", imagen: /fotos/aula-4.jpg }
+
+  horario:
+    activa: true
+    antetitulo: Horario y servicios
+    titulo: Abrimos pronto para que llegues a todo
+    texto: "Entrada flexible y salida escalonada. Elige media jornada o jornada completa, con comedor o sin él."
+    horario:
+      - { dia: Lunes a viernes, horas: "7:30 a 17:30" }
+      - { dia: Julio, horas: Escuela de verano }
+    nota: "Abierto de septiembre a julio. Agosto, cerrado."
+    items:   # servicios con icono
+      - { titulo: Cocina propia, texto: "Menús caseros revisados por una nutricionista. Dietas para alergias.", icono: cubiertos }
+      - { titulo: Primeras horas, texto: "Desde las 7:30, con desayuno incluido.", icono: sol }
+      - { titulo: Siesta en calma, texto: "Sala de descanso con luz tenue y cuna propia.", icono: luna }
+      - { titulo: Inglés jugando, texto: "Canciones y cuentos en inglés cada día desde el aula de 1 a 2 años.", icono: globo }
+      - { titulo: Psicomotricidad, texto: "Sala con colchonetas, rampas y circuitos de movimiento.", icono: pelota }
+      - { titulo: Agenda para familias, texto: "Cada tarde sabes qué ha comido, cuánto ha dormido y qué ha hecho.", icono: mensaje }
+    jornada_titulo: Un día en la escuela
+    jornada:   # un día en la escuela (hora + momento)
+      - { hora: "7:30", titulo: Acogida y desayuno, icono: taza }
+      - { hora: "9:30", titulo: Asamblea y canciones, icono: musica }
+      - { hora: "10:30", titulo: Rincones y patio, icono: pelota }
+      - { hora: "12:00", titulo: Comida, icono: cubiertos }
+      - { hora: "13:00", titulo: Siesta, icono: luna }
+      - { hora: "15:30", titulo: Merienda y salida, icono: casa }
+
+  equipo:
+    activa: true
+    antetitulo: Equipo
+    titulo: Las personas que les cuidan
+    texto: "Maestras y técnicas de educación infantil con años de aula. Siempre las mismas caras para tu peque."
+    personas:
+      - { nombre: Nuria Collado, cargo: Directora y maestra, foto: /placeholders/persona.svg, texto: "Maestra de educación infantil. Lleva quince años acompañando primeros pasos." }
+      - { nombre: Sandra Benito, cargo: Aula de Los Pollitos, foto: /placeholders/persona.svg, texto: "Técnica en educación infantil. Experta en el primer año." }
+      - { nombre: Laura Ortega, cargo: Aula de Las Ardillas, foto: /placeholders/persona.svg, texto: "Técnica en educación infantil y monitora de psicomotricidad." }
+      - { nombre: Pilar Robles, cargo: Aula de Los Delfines, foto: /placeholders/persona.svg, texto: "Maestra. Cuentacuentos y amante del huerto." }
+
+  proyecto:
+    activa: true
+    antetitulo: Proyecto educativo
+    titulo: Aprender con las manos, los pies y el corazón
+    texto: |-
+      Creemos que los niños aprenden jugando, tocando y moviéndose. Por eso nuestras aulas tienen materiales naturales, rincones a su altura y tiempo de sobra para explorar.
+
+      Cuidamos el periodo de adaptación: los primeros días puedes quedarte con tu peque en el aula y vamos alargando el tiempo poco a poco, a su ritmo.
+    imagen: /fotos/proyecto.jpg
+    items:   # pilares del proyecto
+      - { titulo: Juego libre, texto: "Rincones que invitan a probar, montar y desmontar.", icono: estrella }
+      - { titulo: Huerto y naturaleza, texto: "Plantamos, regamos y vemos crecer lo que comemos.", icono: hoja }
+      - { titulo: Familias cerca, texto: "Puertas abiertas, tutorías y fiestas juntos.", icono: corazon }
+      - { titulo: Autonomía, texto: "Comer solos, vestirse y recoger, cada uno a su ritmo.", icono: nino }
+    declaracion: "Cada niño tiene su propio ritmo. Nuestro trabajo es acompañarlo, no correr."
+    firma: "Nuria Collado, directora"
+
+  matricula:
+    activa: true
+    antetitulo: Matrícula
+    titulo: Reserva tu plaza para el próximo curso
+    texto: "Ven a conocer la escuela con tu peque. Te enseñamos las aulas, el patio y la cocina, y resolvemos todas tus dudas."
+    items:   # pasos
+      - { titulo: Pide una visita, texto: "Por teléfono, WhatsApp o con el formulario." }
+      - { titulo: Conoce la escuela, texto: "Una visita de media hora, sin compromiso." }
+      - { titulo: Reserva la plaza, texto: "Rellenas la ficha y entregas la documentación." }
+      - { titulo: Adaptación suave, texto: "Los primeros días entras con tu peque al aula." }
+    nota: "Admitimos el cheque guardería y aplicamos descuento por hermanos."
+    boton: Pedir visita
+
+  galeria:
+    activa: true
+    antetitulo: Galería
+    titulo: Un vistazo a la escuela
+    texto: "Las aulas, el patio y el huerto, tal y como los verás en la visita."
+    galeria:
+      - /fotos/galeria-1.jpg
+      - /fotos/galeria-2.jpg
+      - /fotos/galeria-3.jpg
+      - /fotos/galeria-4.jpg
+      - /fotos/galeria-5.jpg
+      - /fotos/galeria-6.jpg
+
+  opiniones:
+    activa: true
+    antetitulo: Familias
+    titulo: Lo que dicen las familias
+    testimonios:
+      - { texto: "La adaptación fue mucho más fácil de lo que esperábamos. Ahora Hugo entra corriendo cada mañana.", autor: Marta G., detalle: Familia de Las Ardillas }
+      - { texto: "Nos encanta saber cada tarde cómo ha ido el día. Y la comida es casera de verdad.", autor: Javier y Ana, detalle: Familia de Los Pollitos }
+      - { texto: "Las educadoras son un amor. Se nota que les gusta lo que hacen.", autor: Rocío P., detalle: Familia de Los Delfines }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Lo que nos preguntan las familias
+    texto: "¿Te queda alguna duda? Llámanos o escríbenos por WhatsApp."
+    cta: { texto: Hacer una pregunta, url: "/#contacto" }
+    preguntas:
+      - { pregunta: ¿Desde qué edad admitís niños?, respuesta: "Desde los 4 meses hasta los 3 años en la escuela infantil, y de 3 a 6 años en la ludoteca de tarde." }
+      - { pregunta: ¿Cómo es el periodo de adaptación?, respuesta: "Los primeros días puedes quedarte en el aula con tu peque y vamos alargando el tiempo poco a poco. Cada niño marca su ritmo." }
+      - { pregunta: ¿La comida se hace en la escuela?, respuesta: "Sí. Tenemos cocina propia y menús caseros revisados por una nutricionista, con dietas para alergias e intolerancias." }
+      - { pregunta: ¿Aceptáis el cheque guardería?, respuesta: "Sí, lo aceptamos y te ayudamos con la solicitud. También hacemos descuento por hermanos." }
+      - { pregunta: ¿Puedo visitar la escuela antes de matricular?, respuesta: "Claro. Pide una visita y te enseñamos las aulas, el patio y la cocina con calma." }
+      - { pregunta: ¿Qué pasa si mi peque se pone malito?, respuesta: "Te llamamos enseguida. Con fiebre o una enfermedad contagiosa se queda en casa hasta que se recupere, por el bien de todos." }
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Ven a vernos
+    texto: "Estamos en el Sector III, junto al parque. Hay sitio para aparcar a la hora de entrada."
+    imagen: /placeholders/mapa.svg
+    boton: Enviar mensaje

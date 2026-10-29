@@ -1,0 +1,92 @@
+# Metadatos de la plantilla para el catálogo de NoExpertise.
+id: escuela-infantil
+nombre: Escuela infantil
+descripcion: Web alegre para escuelas infantiles y ludotecas, con aulas por edades, horario, equipo y matrícula.
+sectores:
+  - { id: escuela-infantil, nombre: Escuela infantil }
+  - { id: guarderia, nombre: Guardería }
+  - { id: ludoteca, nombre: Ludoteca }
+  - { id: campamentos, nombre: Campamentos }
+  - { id: extraescolares, nombre: Extraescolares }
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: aulas, nombre: Aulas }
+  - { id: horario, nombre: Horario y servicios }
+  - { id: equipo, nombre: Equipo }
+  - { id: proyecto, nombre: Proyecto educativo }
+  - { id: matricula, nombre: Matrícula }
+  - { id: galeria, nombre: Galería }
+  - { id: opiniones, nombre: Opiniones }
+  - { id: preguntas, nombre: Preguntas frecuentes }
+  - { id: contacto, nombre: Contacto }
+estilo: alegre
+plan_minimo: presencia
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-escuela-infantil.noexpertise.com
+activa: true
+orden: 360
+
+# Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
+# tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
+asistente:
+  - id: negocio
+    titulo: "Tu escuela"
+    pregunta: "¿Cómo se llama tu escuela y qué ofrecéis a las familias?"
+    ayuda: "Para qué edades, si tenéis comedor, patio, inglés… y en qué localidad estáis."
+    tipo: texto
+    campos: [nombre, eslogan, seo.titulo, seo.descripcion, secciones.hero.antetitulo, secciones.hero.titulo, secciones.hero.texto, secciones.hero.items]
+  - id: contacto
+    titulo: "Cómo os encuentran"
+    pregunta: "¿Dónde estáis y cómo os pueden llamar o escribir las familias?"
+    ayuda: "Solo lo que quieras que se vea en tu web. Lo que dejes vacío no sale."
+    tipo: datos
+    campos: [contacto.telefono, contacto.whatsapp, contacto.email, contacto.direccion, contacto.horario, redes.instagram, redes.facebook]
+  - id: aulas
+    titulo: "Tus aulas"
+    pregunta: "Cuéntame las aulas o grupos que tenéis: nombre, edades y cómo son. El precio, si quieres. Una por línea."
+    ayuda: "Si lo prefieres, añádelas luego en Contenido."
+    tipo: lista
+    campos: [secciones.aulas.aulas]
+  - id: horario
+    titulo: "Horario y servicios"
+    pregunta: "¿Qué servicios ofrecéis? Comedor, primeras horas, siesta, inglés… ¿Y cómo es un día normal en la escuela?"
+    ayuda: "Las horas de apertura se cambian luego en Contenido, en «Horario y servicios»."
+    tipo: texto
+    campos: [secciones.horario.titulo, secciones.horario.texto, secciones.horario.nota, secciones.horario.items, secciones.horario.jornada]
+  - id: equipo
+    titulo: "Tu equipo"
+    pregunta: "¿Quién cuida de los peques? Nombre y qué hace cada persona, una por línea."
+    ayuda: "Las fotos las pones luego en Contenido."
+    tipo: lista
+    campos: [secciones.equipo.personas]
+  - id: proyecto
+    titulo: "Proyecto educativo"
+    pregunta: "¿Cómo trabajáis con los niños? Juego, naturaleza, adaptación, familias… Lo que os hace diferentes."
+    tipo: texto
+    campos: [secciones.proyecto.titulo, secciones.proyecto.texto, secciones.proyecto.items, secciones.proyecto.declaracion]
+  - id: matricula
+    titulo: "Matrícula"
+    pregunta: "¿Cómo se reserva una plaza? Qué tiene que hacer la familia y qué pasa después."
+    tipo: texto
+    campos: [secciones.matricula.titulo, secciones.matricula.texto, secciones.matricula.items, secciones.matricula.nota]
+  - id: preguntas
+    titulo: "Preguntas frecuentes"
+    pregunta: "¿Qué os preguntan más las familias? Escribe cada pregunta y lo que respondéis."
+    ayuda: "Si lo prefieres, añádelas luego en Contenido."
+    tipo: lista
+    campos: [secciones.preguntas.preguntas]
+  - id: fotos
+    titulo: "Tus fotos"
+    pregunta: "Pon una foto de portada y, si quieres, las de las aulas, el proyecto y la galería."
+    ayuda: "Sube las tuyas o elige una del banco. Las que no cambies se quedan como están."
+    tipo: fotos
+    campos: [secciones.hero.imagen, secciones.proyecto.imagen, secciones.galeria.galeria]
+  - id: aspecto
+    titulo: "Colores y logo"
+    pregunta: "Elige los colores de tu web y, si tienes, tu logo."
+    tipo: eleccion
+    campos: [colores.primario, colores.acento, logo]
+  - id: repaso
+    titulo: "Repaso"
+    tipo: repaso

@@ -1,0 +1,93 @@
+---
+// Pie «noche»: banda a todo el ancho en azul muy oscuro (derivado del primario) con festón arriba, en cuatro
+// columnas: marca, eslogan y redes; contacto; horario; menú. Estrella y nube decorativas.
+// «Web creada con NoExpertise» se muestra si site.yaml → marca_pie no es false (plan gratis).
+import { site, tel, mapa, whatsapp } from '../data/site';
+import Icono from './ui/Icono.astro';
+import Sello from './ui/Sello.astro';
+import Forma from './ui/Forma.astro';
+interface Props { variante?: string }
+const { variante = 'noche' } = Astro.props;
+const c = site.contacto;
+const redes = Object.entries(site.redes).filter(([, url]) => url);
+// Horario: las filas `horario` de las secciones activas que las tengan; si no hay, contacto.horario.
+const filas = Object.values(site.secciones)
+  .filter((s) => s.activa && s.horario.length > 0)
+  .flatMap((s) => s.horario)
+  .filter((h) => h && (h.dia || h.horas))
+  .slice(0, 4);
+const anio = new Date().getFullYear();
+---
+
+<footer class={`pie pie--${variante} feston-arriba`}>
+  <Forma tipo="estrella" class="pie-estrella" />
+  <Forma tipo="nube" class="pie-nube" />
+  <div class="contenedor pie-rejilla">
+    <div class="pie-marca">
+      <p class="flex items-center gap-3">
+        <Sello class="cab-sello" />
+        <span class="pie-nombre">{site.nombre}</span>
+      </p>
+      {site.eslogan && <p class="pie-eslogan">{site.eslogan}</p>}
+      {
+        redes.length > 0 && (
+          <ul class="pie-redes">
+            {redes.map(([red, url]) => (
+              <li>
+                <a href={url} rel="noopener" target="_blank" aria-label={red}>
+                  <Icono nombre={red} tam={20} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+    {
+      (c.telefono || c.whatsapp || c.email || c.direccion) && (
+        <div>
+          <p class="pie-titulo">Contacto</p>
+          <ul class="pie-lista">
+            {c.telefono && <li><a href={tel(c.telefono)}>{c.telefono}</a></li>}
+            {c.whatsapp && <li><a href={whatsapp(c.whatsapp)} rel="noopener" target="_blank" class="inline-flex items-center gap-2"><Icono nombre="whatsapp" tam={18} />{c.whatsapp}</a></li>}
+            {c.email && <li><a class="break-all" href={`mailto:${c.email}`}>{c.email}</a></li>}
+            {c.direccion && <li><a href={mapa(c.direccion)} rel="noopener" target="_blank">{c.direccion}</a></li>}
+          </ul>
+        </div>
+      )
+    }
+    {
+      (filas.length > 0 || c.horario) && (
+        <div>
+          <p class="pie-titulo">Horario</p>
+          <ul class="pie-lista">
+            {filas.length > 0
+              ? filas.map((h) => <li><span class="font-extrabold">{h.dia}</span>{h.dia && h.horas && ' · '}{h.horas}</li>)
+              : <li>{c.horario}</li>}
+          </ul>
+        </div>
+      )
+    }
+    {
+      site.menu.length > 0 && (
+        <div>
+          <p class="pie-titulo">Web</p>
+          <ul class="pie-lista">
+            {site.menu.map((e) => <li><a href={e.url}>{e.texto}</a></li>)}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+  <div class="contenedor pie-legal">
+    <span>© {anio} {site.nombre}</span>
+    <a href="/aviso-legal">Aviso legal y privacidad</a>
+    {
+      site.marca_pie && (
+        <span class="pie-noexpertise">
+          Web creada con <a href="https://noexpertise.com" rel="noopener">NoExpertise</a>
+        </span>
+      )
+    }
+  </div>
+</footer>

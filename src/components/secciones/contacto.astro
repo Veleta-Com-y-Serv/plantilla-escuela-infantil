@@ -1,0 +1,58 @@
+---
+// Contacto: banda primaria (azul) partida. A la izquierda titular, datos con icono en bola amarilla y formulario
+// (mailto); a la derecha el plano a sangre hasta el borde de la ventana (enlaza a mapas). Sin plano, el formulario
+// pasa a la derecha. Campos: antetitulo, titulo, texto, imagen (plano opcional), boton (texto del botón, opcional).
+import { seccion, site, tel, mapa, whatsapp, valor } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const c = site.contacto;
+const datos = [
+  c.direccion && { icono: 'mapa', valor: c.direccion, url: mapa(c.direccion), externo: true },
+  c.telefono && { icono: 'telefono', valor: c.telefono, url: tel(c.telefono), externo: false },
+  c.whatsapp && { icono: 'whatsapp', valor: c.whatsapp, url: whatsapp(c.whatsapp), externo: true },
+  c.email && { icono: 'correo', valor: c.email, url: `mailto:${c.email}`, externo: false },
+  c.horario && { icono: 'reloj', valor: c.horario, url: '', externo: false },
+].filter(Boolean) as { icono: string; valor: string; url: string; externo: boolean }[];
+const boton = valor(s?.boton) || undefined;
+---
+
+{
+  s && (
+    <section id={id} class="banda banda-azul paneles">
+      <div class="panel panel--izq">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="!mb-0" />
+        {datos.length > 0 && (
+          <ul class="datos">
+            {datos.map((d) => (
+              <li class="dato">
+                <span class="bola bola-amarilla h-11 w-11"><Icono nombre={d.icono} tam={20} /></span>
+                <span class="min-w-0 break-words">
+                  {d.url ? <a href={d.url} rel={d.externo ? 'noopener' : undefined} target={d.externo ? '_blank' : undefined}>{d.valor}</a> : d.valor}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+        {s.imagen && (
+          <div class="mt-12">
+            <FormularioContacto boton={boton} prefijo={`${id}-f`} />
+          </div>
+        )}
+      </div>
+      {s.imagen ? (
+        <a href={mapa(c.direccion) || undefined} rel="noopener" target="_blank" class="plano" aria-label={c.direccion ? `Ver ${c.direccion} en el mapa` : site.nombre}>
+          <Imagen src={s.imagen} alt="" ancho={1200} alto={1000} />
+        </a>
+      ) : (
+        <div class="panel panel--der">
+          <FormularioContacto boton={boton} prefijo={`${id}-f`} />
+        </div>
+      )}
+    </section>
+  )
+}

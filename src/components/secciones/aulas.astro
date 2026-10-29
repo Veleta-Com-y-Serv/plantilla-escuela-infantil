@@ -1,0 +1,71 @@
+---
+// Aulas: cabecera a dos columnas (titular a la izquierda, texto a la derecha) y debajo una fila de bloques de color de
+// borde a borde, uno por aula, alternando acento, primario, verde y noche. Cada bloque: foto en arco, pastilla con
+// las edades, nombre, texto, precio (solo si lo hay) y el botón `cta` (lleva a la matrícula y deja elegida esa aula).
+// Campos: `aulas[]` { nombre, texto, edades, precio, imagen } y `cta`.
+import { seccion, valor } from '../../data/site';
+import { altFicha } from '../../lib/seo';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const aulas = s ? s.aulas.filter((a) => a && valor(a.nombre)) : [];
+const tonos = [
+  { banda: 'banda-amarilla', boton: 'btn' },
+  { banda: 'banda-azul', boton: 'btn btn-amarillo' },
+  { banda: 'banda-verde', boton: 'btn' },
+  { banda: 'banda-noche', boton: 'btn btn-amarillo' },
+];
+const columnas = aulas.length % 3 === 0 && aulas.length % 4 !== 0 ? 'aulas-rejilla--3' : 'aulas-rejilla--4';
+---
+
+{
+  s && (aulas.length > 0 || s.titulo || s.texto) && (
+    <section id={id} class="banda banda-crema pt-[var(--ritmo)] md:pt-[var(--ritmo-md)]">
+      <div class="contenedor">
+        <div class="cabeza-seccion">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} />
+          {s.texto && <p class="titular-texto">{s.texto}</p>}
+        </div>
+      </div>
+      {aulas.length > 0 ? (
+        <ul class:list={['aulas-rejilla', columnas]}>
+          {aulas.map((a, i) => {
+            const t = tonos[i % tonos.length];
+            const precio = valor(a.precio);
+            return (
+              <li class:list={['aula', t.banda]}>
+                {a.imagen && (
+                  <div class="aula-foto">
+                    <Imagen src={a.imagen} alt={altFicha(a)} ancho={700} alto={700} />
+                    {valor(a.edades) && <span class="pildora aula-edades">{a.edades}</span>}
+                  </div>
+                )}
+                {!a.imagen && valor(a.edades) && <span class="pildora mx-auto bg-[var(--c-fondo)] px-4 py-2 text-[var(--c-texto)]">{a.edades}</span>}
+                <h3 class:list={['aula-nombre', !a.imagen && '!mt-5']}>{a.nombre}</h3>
+                {a.texto && <p class="aula-texto">{a.texto}</p>}
+                {(precio || s.cta?.url) && (
+                  <div class="aula-pie">
+                    {precio && <p class="aula-precio">{precio}</p>}
+                    {s.cta?.url && <a class={t.boton} href={s.cta.url} data-aula={a.nombre}>{s.cta.texto}</a>}
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <div class="pb-[var(--ritmo)]" />
+      )}
+    </section>
+  )
+}
+<script is:inline>
+  // Al pulsar el botón de un aula, la deja elegida en el desplegable del formulario de matrícula.
+  document.querySelectorAll('[data-aula]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      document.querySelectorAll('select[name="aula"]').forEach(function (s) { s.value = a.getAttribute('data-aula'); });
+    });
+  });
+</script>
