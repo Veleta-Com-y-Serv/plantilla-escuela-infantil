@@ -57,9 +57,39 @@ secciones:
     texto: "Grupos reducidos y espacios pensados para la edad de tu peque: para gatear, para dar los primeros pasos y para descubrirlo todo."
     cta: { texto: Pedir plaza, url: "/#matricula" }   # botón de cada aula (deja elegida esa aula en la matrícula)
     aulas:
-      - { nombre: Los Pollitos, edades: "4 a 12 meses", texto: "Un aula tranquila, con cunas, zona de gateo y mucho mimo. Seguimos el ritmo de cada bebé.", precio: "desde 330 €/mes", imagen: /fotos/aula-1.jpg }
-      - { nombre: Las Ardillas, edades: "1 a 2 años", texto: "Primeros pasos, primeras palabras y juego libre con materiales naturales.", precio: "desde 310 €/mes", imagen: /fotos/aula-2.jpg }
-      - { nombre: Los Delfines, edades: "2 a 3 años", texto: "Rincones de juego, cuentos, pintura y la despedida del pañal sin prisas.", precio: "desde 290 €/mes", imagen: /fotos/aula-3.jpg }
+      - nombre: Los Pollitos
+        edades: "4 a 12 meses"
+        texto: "Un aula tranquila, con cunas, zona de gateo y mucho mimo. Seguimos el ritmo de cada bebé."
+        precio: "desde 330 €/mes"
+        imagen: /fotos/aula-1.jpg
+        detalle: |
+          Los Pollitos es el aula de los más pequeños de la escuela. Es un espacio luminoso y silencioso, con suelo blando, cunas, una zona amplia para gatear y rincones a ras de suelo donde los bebés pueden mirar, tocar y chupar objetos seguros y naturales.
+
+          Aquí no hay horarios cerrados: comen, duermen y juegan cuando lo necesitan, y las educadoras se adaptan a lo que cada familia cuenta por la mañana. La misma persona se ocupa del cambio, del biberón y de las canciones, para que el bebé encuentre siempre una cara conocida.
+
+          Cada tarde las familias reciben en la agenda cómo ha ido el día: qué ha comido, cuánto ha dormido y qué le ha hecho reír. El periodo de adaptación es gradual y puedes quedarte en el aula los primeros días. Si quieres conocer el aula, pide una visita y la vemos juntos con calma.
+      - nombre: Las Ardillas
+        edades: "1 a 2 años"
+        texto: "Primeros pasos, primeras palabras y juego libre con materiales naturales."
+        precio: "desde 310 €/mes"
+        imagen: /fotos/aula-2.jpg
+        detalle: |
+          Las Ardillas es el aula de los primeros pasos y de las primeras palabras. Los niños empiezan a moverse solos por la sala, así que el espacio está pensado para que lo exploren con seguridad: rampas bajas, túneles de tela, cestos con materiales naturales y un rincón de cuentos con cojines.
+
+          Trabajamos con juego libre y con propuestas sencillas que cambian a lo largo del curso: trasvasar arena, hacer torres, pintar con las manos o salir al patio a ver el huerto. Las educadoras acompañan sin dirigir demasiado y ponen palabras a lo que cada niño hace y siente.
+
+          En esta etapa empezamos con las canciones y los cuentos en inglés, siempre de forma breve y jugada. Comen con cuchara y van ganando autonomía poco a poco, a su ritmo. Las familias siguen el día a través de la agenda y se reúnen con la tutora cuando lo necesitan.
+      - nombre: Los Delfines
+        edades: "2 a 3 años"
+        texto: "Rincones de juego, cuentos, pintura y la despedida del pañal sin prisas."
+        precio: "desde 290 €/mes"
+        imagen: /fotos/aula-3.jpg
+        detalle: |
+          Los Delfines es el aula de los mayores de la escuela infantil, donde se prepara el salto al colegio sin perder el juego. La sala se organiza en rincones: la cocinita, las construcciones, la pintura, los disfraces y la biblioteca, y cada niño elige dónde quiere estar y cuánto tiempo.
+
+          Es la etapa de la palabra y de querer hacerlo todo solos. Les damos tiempo para vestirse, recoger y servirse la comida, y acompañamos la despedida del pañal sin prisas ni comparaciones, de la mano de la familia. Hay asamblea cada mañana, cuentos, música, psicomotricidad y talleres de pintura y de huerto.
+
+          Trabajamos las emociones con juegos y cuentos para que aprendan a ponerles nombre y a pedir ayuda. Al final del curso preparamos con ellos la despedida, para que lleguen al colegio con confianza. Puedes venir a ver el aula cuando quieras.
       - { nombre: Ludoteca de tarde, edades: "3 a 6 años", texto: "Después del cole: merienda, juego, manualidades y talleres de inglés.", precio: "desde 95 €/mes", imagen: /fotos/aula-4.jpg }
 
   horario:

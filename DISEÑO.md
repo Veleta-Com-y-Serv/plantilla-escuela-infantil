@@ -66,3 +66,6 @@ siesta. Siempre sin personas, sin texto legible y sin logotipos. El equipo lleva
 - Meter dibujos de personajes o tipografías «infantiles» descargadas: la alegría la ponen el color, las formas y
   el ritmo de bandas.
 - Parecerse a `veterinaria` (turquesa y coral, tarjetas redondeadas) o a `academia-formacion` (índigo y lima).
+
+## Páginas propias (fichas)
+Misma piel que la portada: banda amarilla con migas y hero partido (título enorme, pastilla de edades, botones de matrícula y WhatsApp, foto en arco), banda crema con el `detalle` y, al lado, tabla de datos en amarillo claro y bloque azul de matrícula; galería en banda verde y otras aulas en bloques azul, verde y noche.
