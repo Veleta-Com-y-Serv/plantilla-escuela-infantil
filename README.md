@@ -7,6 +7,7 @@ Web alegre para escuelas infantiles y ludotecas, con aulas por edades, horario, 
 - A ancho completo: todas las secciones son bandas de borde a borde (amarillo, azul, verde, crema y noche), con portada partida a sangre, aulas en bloques de color sin márgenes, fotos a sangre 50/50, mosaico de galería sin márgenes y festones entre bandas.
 - Campos propios: `aulas[]` (nombre, edades, texto, precio, imagen), `horario.horario[]` + `horario.jornada[]` (un día en la escuela), `proyecto.declaracion` y `firma` (cita grande), `matricula.items` (pasos) con formulario de visita y desplegable de aulas, `opiniones.testimonios[].detalle`, `hero.destacado` (pegatina).
 - SEO de base incluido (`src/lib/seo.ts`): canónica, og:image, JSON-LD del negocio (`ChildCare`) y de las preguntas frecuentes, `robots.txt`, `sitemap.xml` y `llms.txt`; `noindex` si `seo.indexable: false`.
+- Varias páginas (opcional, `paginas:` en la raíz de `site.yaml`): Inicio + una página por entrada (`{ ruta, titulo, secciones: "a; b" }`, hasta 6) con el menú hecho solo; reparto recomendado en `template.yaml → paginas`. Sin la clave, una sola página larga.
 - Contenido editable en `site.yaml`; metadatos en `template.yaml`; reglas para el agente en `CLAUDE.md`; brief de diseño en `DISEÑO.md`; fotos de la demo en `fotos.json`.
 
 ```
